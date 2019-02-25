@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     private KafkaTemplate<String, User> kafkaTemplate;
 
-    private static final String TOPIC = "Confirmation_Mail";
+    private static final String TOPIC = "confirmation_mail_json";
 
     @GetMapping("/publish/{mail}")
     public String post(@PathVariable("mail") final String mail) {
