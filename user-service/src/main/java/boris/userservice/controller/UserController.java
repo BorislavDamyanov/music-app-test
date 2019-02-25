@@ -26,9 +26,14 @@ public class UserController {
     @GetMapping("/publish/{mail}")
     public String post(@PathVariable("mail") final String mail) {
 
-        kafkaTemplate.send(TOPIC, new User(66L, "bodamyanov", "borislav", "damyanov", "boris.damyanov@gmail.com"));
+        kafkaTemplate.send(TOPIC, new User("bodamyanov", "boris.damyanov@gmail.com"));
 
         return "Published successfully";
+    }
+
+    @RequestMapping("/{username}")
+    public User getUserByUsername(@PathVariable String username) {
+        return userService.getUserByUsername(username);
     }
 
 

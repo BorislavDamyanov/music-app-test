@@ -1,14 +1,24 @@
 package boris.userservice;
 
+import boris.userservice.entity.Role;
+import boris.userservice.entity.User;
+import boris.userservice.entity.UserRole;
+import boris.userservice.service.interfaces.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-public class UserServiceApplication {
+public class UserServiceApplication implements CommandLineRunner{
+
+    @Autowired
+    private IUserService userService;
 
     public static void main(String[] args) {
         SpringApplication.run(UserServiceApplication.class, args);
@@ -16,4 +26,24 @@ public class UserServiceApplication {
 
 
 
-}
+    @Override
+    public void run(String... args) throws Exception {
+
+        User user1 = new User();
+        user1.setUsername("admin");
+        user1.setMail("boris.damyanov@gmail.com");
+        user1.setPassword("1234");
+        user1.setFirstName("Borislav");
+        user1.setLastName("Damyanov");
+
+        Set<UserRole> userRoles = new HashSet<>();
+        Role role1 = new Role();
+        role1.setRoleId(1);
+        userRoles.add(new UserRole(user1, role1));
+
+        userService.createUser(user1);
+    }
+
+
+    }
+
