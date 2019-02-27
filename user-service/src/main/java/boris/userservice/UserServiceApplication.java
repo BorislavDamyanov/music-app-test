@@ -32,9 +32,9 @@ public class UserServiceApplication implements CommandLineRunner{
     public void run(String... args) throws Exception {
 
         User user1 = new User();
-        user1.setUsername("admin");
+        user1.setUsername("boris");
         user1.setMail("boris.damyanov@gmail.com");
-        user1.setPassword("1234");
+        user1.setPassword("password");
         user1.setFirstName("Borislav");
         user1.setLastName("Damyanov");
 
